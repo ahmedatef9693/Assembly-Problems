@@ -1,0 +1,35 @@
+include irvine32.inc
+.data
+
+x byte " enter your first number : ",0
+y byte " enter your second number : ",0
+tmp dword 0
+.code
+main proc
+
+mov ebx,0
+mov edx ,offset x
+call writestring
+call readint
+mov ebx,eax
+mov tmp ,ebx
+mov edx,offset y
+call writestring
+call readint
+sub eax,1
+mov ecx,eax
+
+mult:
+
+add ebx,tmp
+
+
+loop mult
+mov eax,ebx
+
+call writeint
+call crlf
+
+exit
+main endp
+end main

@@ -1,0 +1,55 @@
+include irvine32.inc
+.data
+
+ent byte "enter a string : ",0
+arr byte 0
+invalid_number byte "invalid number",0
+str1 byte " the binary value = ",0
+input_string byte 8 dup(0),0
+res byte 0
+.code
+main proc
+
+mov edx,offset ent
+call writestring
+mov ecx,100
+call readstring
+
+mov ecx,8
+mov edx,offset input_string
+
+l1:
+mov al,[edx]
+cmp al,1
+je one
+
+cmp al,0
+je zero
+
+jmp els
+
+one:
+stc
+rcl byte ptr[edx],1
+inc edx
+jmp ex
+zero:
+clc
+rcl res,1
+inc edx
+loop l1
+mov eax,edx
+mov edx, offset str1
+
+call writebin
+call crlf
+jmp ex
+
+els:
+mov edx,offset invalid_number
+call writestring
+ex:
+
+exit
+main endp
+end main

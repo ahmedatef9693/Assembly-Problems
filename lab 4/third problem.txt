@@ -1,0 +1,25 @@
+include irvine32.inc
+.data
+
+
+.code
+
+main proc
+
+call readint
+mov ecx ,eax
+mov al,'*'
+outer:
+mov ebx,ecx
+inner:
+ 
+ call writechar
+
+
+loop inner
+call crlf
+mov ecx,ebx
+loop outer
+	ret
+main endp
+end main

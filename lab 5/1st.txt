@@ -1,0 +1,34 @@
+include irvine32.inc
+.data
+
+src byte "hello"
+dest byte ?
+.code
+main proc
+	
+	mov  esi,offset src
+	mov edi,offset dest
+
+
+	mov ecx,lengthof src
+	l1:
+	movzx eax,byte ptr[esi]
+	push eax
+	inc esi
+	loop l1
+
+	mov ecx,lengthof src
+	l2:
+	pop eax
+	mov [edi],al
+	inc edi
+
+	
+	loop l2
+	mov edx,offset dest
+	call writestring
+	call crlf
+ret
+main endp
+end main
+

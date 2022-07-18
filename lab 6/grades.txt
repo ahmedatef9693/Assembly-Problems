@@ -1,0 +1,100 @@
+include irvine32.inc
+.data
+
+score byte " Enter Your Score : ",0
+excellent byte "Excellent",0
+vgood byte "very good",0
+good byte "good",0
+fair byte "fair",0
+fail byte "failed",0
+Error byte " Error invalid number !",0
+
+.code
+
+
+mygrades proc
+
+mov edx,offset score
+call writestring
+
+call readint
+
+
+;case 1
+
+cmp eax,90
+jge exc
+
+cmp eax,80
+jge vg
+
+cmp eax,70
+jge god
+
+cmp eax,60
+jge faire
+
+cmp eax,0
+jge failed
+
+
+cmp eax,0
+jl err
+
+exc:
+cmp eax,100
+jg err
+mov edx,offset excellent
+call writestring
+jmp ending
+
+err:
+mov edx,offset Error
+call writestring
+jmp ending
+
+
+vg:
+mov edx,offset vgood
+call writestring
+jmp ending
+
+god:
+mov edx,offset good
+call writestring
+jmp ending
+
+
+faire:
+mov edx,offset fair
+call writestring
+jmp ending
+
+failed:
+cmp eax,60
+jl do
+do:
+mov edx,offset fail
+call writestring
+
+
+ending:
+call crlf
+ret
+mygrades endp
+
+
+
+
+main PROC
+
+call mygrades
+
+
+
+
+	exit
+
+main ENDP
+
+END main

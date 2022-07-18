@@ -1,0 +1,61 @@
+include irvine32.inc
+.data
+
+x byte "enter array size ="
+arr byte ?
+y byte "enter the array : "
+min sdword 7fffffffh        ;largest value signed for dword    7 as abinary = 0111  most signifincant bit is 0 +ve num
+.code
+
+
+min_val proc
+
+mov edx,offset x
+call writestring
+
+call readint
+mov edx,offset y
+call writestring
+
+call crlf
+
+mov esi,offset arr
+
+mov ecx,eax
+l1:
+
+call readint
+mov [esi],eax
+cmp eax,min
+jge els
+ 
+mov min,eax
+
+
+els:
+inc esi
+loop l1
+
+
+mov eax,0
+
+mov eax,min
+call writeint
+
+
+ret
+min_val endp
+
+
+main PROC
+
+call min_val
+
+
+
+
+	exit
+
+main ENDP
+
+END main

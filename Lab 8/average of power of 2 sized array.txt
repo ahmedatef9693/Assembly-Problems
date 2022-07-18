@@ -1,0 +1,72 @@
+INCLUDE Irvine32.inc
+.DATA
+	ent byte "enter your array : ",0
+	strsize byte "enter the array size : ",0
+	array dword 64 dup(?)
+	avg byte "The average = "
+	sum dword 0 
+.code
+	main PROC
+	mov edx,offset strsize
+	call writestring
+
+	call readint
+	mov ebx,eax
+
+	mov ecx,ebx
+	mov edx,offset ent
+	call writestring
+	call crlf
+	mov esi,offset array
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;|reading array|;;;;;;;;;;;;;;;;;;;;;;;;;
+	
+	l1:
+	call readint
+	mov [esi],eax
+	add esi,4
+	loop l1
+	
+	mov esi,offset array
+	mov edx,offset avg
+	mov ecx,ebx
+	call writestring
+	call calc_avg
+	call writeint
+	call crlf
+
+	
+	exit
+	main endp
+
+	
+	
+	
+	sum_values proc
+	mov eax,0
+
+	l2:
+
+	add eax,[esi]
+	add esi,4
+	
+	loop l2
+	;mov sum,eax
+	
+	ret
+	
+	sum_values endp
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	calc_avg proc
+
+	call sum_values
+	mov ecx,ebx
+	l2:
+	shr eax,1
+	shr ecx,1
+	cmp ecx,1
+	jne l2
+	ret
+	
+	calc_avg endp
+
+    END main

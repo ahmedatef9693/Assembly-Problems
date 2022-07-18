@@ -1,0 +1,26 @@
+include irvine32.inc
+.data
+
+array1 dword 10,20,30,40,50
+
+.code
+
+main proc
+mov ecx ,lengthof array1
+mov eax ,0
+mov esi, offset array1
+start:
+ 
+ mov eax ,[esi]
+ add eax,[esi]
+ add esi,4
+
+call writeint
+
+loop start
+
+
+
+	ret
+main endp
+end main

@@ -1,0 +1,31 @@
+INCLUDE Irvine32.inc
+.DATA
+	
+	ent byte "enter your number : ",0
+	array dword 1,2,3,4,5
+    mult dword ?
+	.code
+	main PROC
+    
+	mov eax,0
+	mov edx,offset ent
+	call writestring
+	call readint
+	mov mult,eax
+	mov esi,offset array
+	mov ecx,5	
+	l1:
+    mov ebx,[esi]
+
+    mul ebx
+
+	call writeint
+	mov eax,mult
+    add esi,4
+   loop l1
+  
+
+
+	exit
+    main endp
+    END main

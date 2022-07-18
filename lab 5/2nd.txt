@@ -1,0 +1,35 @@
+include irvine32.inc
+.data
+arr1 DWORD 10, 20, 30, 40, 50
+sum_val dword ?
+
+.code
+sum_arr proc
+
+
+mov esi,offset arr1
+mov eax,0
+mov ecx,lengthof arr1
+l1:
+add eax,[esi]
+
+add esi,4
+
+loop l1
+mov sum_val,eax
+call writeint
+
+ret
+sum_arr endp
+
+main proc
+
+call sum_arr
+
+
+	
+
+exit
+main endp
+end main
+

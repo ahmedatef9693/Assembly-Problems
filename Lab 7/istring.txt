@@ -1,0 +1,53 @@
+
+include irvine32.inc
+
+.data
+
+
+input byte "enter your input : ",0
+
+st1 byte "this is a number",0
+st2 byte "this is a string",0
+.code
+main proc 
+
+mov edx,offset input
+call writestring
+
+mov ecx,100
+call readstring
+mov esi,offset input
+
+mov ecx,9
+l1:
+mov eax,[edx]
+cmp al,'0'
+jnge isnum
+cmp  al,'0'
+jnae ischar
+cmp al,'9'
+jnbe  ischar
+
+
+jmp isnum
+
+
+
+loop l1
+
+
+isnum:
+mov edx,offset st1 
+call writestring
+call crlf
+jmp output
+
+ischar:
+mov edx,offset st2
+call writestring
+call crlf
+
+output:
+	exit
+main endp
+end main
